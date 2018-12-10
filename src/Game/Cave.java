@@ -2,10 +2,10 @@ package Game;
 
 import Rooms.Room;
 
-public class Building {
+public class Cave {
     private Room[][]map;
 
-    public Building (Room[][]map){
+    public Cave (Room[][]map){
         this.map = map;
     }
 

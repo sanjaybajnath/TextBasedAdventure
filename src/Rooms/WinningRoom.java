@@ -26,10 +26,6 @@ public class WinningRoom extends Room
         Runner.gameOff();
     }
 
-    @Override
-    public String toString(){
-        return("[W]");
-    }
 
 
 }

@@ -16,6 +16,7 @@ public class Runner {
     {
         Room[][] building = new Room[5][5];
 
+        Cave c = new Cave(building);
         //Fill the building with normal rooms
         for (int x = 0; x<building.length; x++)
         {
@@ -40,9 +41,12 @@ public class Runner {
         Scanner in = new Scanner(System.in);
         while(gameOn)
         {
-            System.out.println("Where would you like to move? (Choose N, S, E, W)");
+            System.out.println("Where would you like to move? (Choose N, S, E, W) Or, press M to look at the map.");
             String move = in.nextLine();
-            if(validMove(move, player1, building))
+            if (move.toLowerCase().trim().equals("m")){
+                c.print();
+            }
+            else if(validMove(move, player1, building))
             {
                 System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
 

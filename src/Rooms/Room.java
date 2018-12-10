@@ -35,10 +35,15 @@ public class Room {
     }
 
     public String toString(){
-        if (this.discovered == false){
+        if(this.occupant != null){
+            return("[P]");
+        }
+        else if (this.discovered == false){
             return("[?]");
         }
-        return ("[-]");
+        else{
+            return ("[-]");
+        }
     }
 
 }
