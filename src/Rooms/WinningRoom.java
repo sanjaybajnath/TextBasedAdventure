@@ -5,6 +5,7 @@ import People.Person;
 
 public class WinningRoom extends Room
 {
+    private boolean discovered = false;
 
     public WinningRoom(int x, int y) {
         super(x, y);
@@ -23,6 +24,11 @@ public class WinningRoom extends Room
         x.setyLoc(this.yLoc);
         System.out.println("You found the winning room! Ten points for Gryffindor.");
         Runner.gameOff();
+    }
+
+    @Override
+    public String toString(){
+        return("[W]");
     }
 
 
