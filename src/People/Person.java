@@ -7,7 +7,9 @@ public class Person {
     String firstName;
     String familyName;
     int xLoc, yLoc;
-    private int health;
+    public static int health;
+    public static boolean hasKey = false;
+    public static boolean hasWeapon = false;
 
     public int getxLoc() {
         return xLoc;

@@ -1,8 +1,11 @@
 package Rooms;
 
+import Items.Item;
 import People.Person;
 
 public class Room {
+    public boolean normalRoom = true;
+    public Item item;
     Person occupant;
     int xLoc,yLoc;
     private boolean discovered = false;
@@ -19,10 +22,18 @@ public class Room {
     public void enterRoom(Person x)
     {
         this.discovered = true;
-        System.out.println("You enter a plain old room");
+
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
+        if (this.item == null){
+            System.out.println("You enter a plain old room");
+        }
+        else{
+            this.item.use(x);
+        }
+
+
     }
 
     /**
@@ -45,5 +56,14 @@ public class Room {
             return ("[-]");
         }
     }
+
+    public int getxLoc(){
+        return this.xLoc;
+    }
+    public int getyLoc(){
+        return this.yLoc;
+    }
+
+
 
 }

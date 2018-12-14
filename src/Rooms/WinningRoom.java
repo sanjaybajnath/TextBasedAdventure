@@ -1,7 +1,7 @@
 package Rooms;
 
-import Game.Runner;
-import People.Person;
+        import Game.Runner;
+        import People.Person;
 
 public class WinningRoom extends Room
 {
@@ -16,7 +16,6 @@ public class WinningRoom extends Room
      * Triggers the game ending conditions.
      * @param x the Person entering
      */
-    @Override
     public void enterRoom(Person x) {
 
         occupant = x;

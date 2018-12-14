@@ -9,6 +9,14 @@ public class Cave {
         this.map = map;
     }
 
+    public int getRows(){
+        return map.length;
+    }
+
+    public int getColumns(){
+        return map[0].length;
+    }
+
     public void print(){
         String row = "";
         for (int i = 0; i<map.length;i++){

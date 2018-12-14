@@ -1,9 +1,15 @@
 package Game;
 
+//Find a key and get to the exit without dying.
+
 import People.Person;
 import Rooms.OtherRoom;
 import Rooms.Room;
-import Rooms.WinningRoom;
+import Rooms.Exit;
+import Rooms.BadRoom;
+import Items.Key;
+import Items.HealthPack;
+
 
 import java.util.Scanner;
 
@@ -16,7 +22,7 @@ public class Runner {
     {
         Room[][] building = new Room[5][5];
 
-        Cave c = new Cave(building);
+
         //Fill the building with normal rooms
         for (int x = 0; x<building.length; x++)
         {
@@ -26,21 +32,101 @@ public class Runner {
             }
         }
 
-        //Create a random winning room.
+        //Create a random exit room.
         int x = (int)(Math.random()*building.length);
         int y = (int)(Math.random()*building.length);
-        building[x][y] = new WinningRoom(x, y);
+        while(x==0 && y == 0){
+            x = (int)(Math.random()*building.length);
+            y = (int)(Math.random()*building.length);
+        }
+        Room exitRoom = new Exit (x,y);
+        building[x][y] = exitRoom;
 
-        int x1 = (int)(Math.random()*building.length);
-        int y1 = (int)(Math.random()*building.length);
-        building[x1][y1] = new OtherRoom(x1, y1);
+
+        boolean badCoordinates = true;
+        int x1 = 0;
+        int y1 = 0;
+        while(badCoordinates){
+            x1 = (int)(Math.random()*building.length);
+            y1 = (int)(Math.random()*building.length);
+            if(x1==0 && y1 == 0){
+                badCoordinates = true;
+            }
+            else if(x1==exitRoom.getxLoc() && y1 == exitRoom.getyLoc()){
+                badCoordinates = true;
+            }
+            else{
+                badCoordinates = false;
+            }
+        }
+        Room badRoom1 = new BadRoom(x1,y1);
+        building[x1][y1] = badRoom1;
+
+        boolean badCoordinates2 = true;
+        int x2 = 0;
+        int y2 = 0;
+        while (badCoordinates2){
+            x2 = (int)(Math.random()*building.length);
+            y2 = (int)(Math.random()*building.length);
+            if(x2==0 && y2 == 0){
+                badCoordinates2 = true;
+            }
+            else if(x2==exitRoom.getxLoc() && y2 == exitRoom.getyLoc()){
+                badCoordinates2 = true;
+            }
+            else if(x2==badRoom1.getxLoc() && y2 == badRoom1.getyLoc()){
+                badCoordinates2 = true;
+            }
+            else{
+                badCoordinates2 = false;
+            }
+        }
+        Room badRoom2 = new BadRoom(x2,y2);
+        building[x2][y2] = badRoom2;
+
+
+
+        //Place items into rooms
+        int z = (int)(Math.random()*building.length);
+        int w = (int)(Math.random()*building.length);
+        while (building[z][w].normalRoom!=true || building[z][w].item!=null){
+            z = (int)(Math.random()*building.length);
+            w = (int)(Math.random()*building.length);
+        }
+        Key k = new Key();
+        building[z][w].item = k;
+
+        int z1 = (int)(Math.random()*building.length);
+        int w1 = (int)(Math.random()*building.length);
+        while (building[z][w].normalRoom!=true || building[z1][w1].item!=null){
+            z1 = (int)(Math.random()*building.length);
+            w1 = (int)(Math.random()*building.length);
+        }
+        HealthPack h1 = new HealthPack();
+        building[z1][w1].item = h1;
+
+        int z2 = (int)(Math.random()*building.length);
+        int w2 = (int)(Math.random()*building.length);
+        while (building[z2][w2].normalRoom!=true || building[z2][w2].item!=null){
+            z2 = (int)(Math.random()*building.length);
+            w2 = (int)(Math.random()*building.length);
+        }
+        HealthPack h2 = new HealthPack();
+        building[z2][w2].item = h2;
+
 
         //Setup player 1 and the input scanner
         Person player1 = new Person("FirstName", "FamilyName", 0,0);
         building[0][0].enterRoom(player1);
         Scanner in = new Scanner(System.in);
+        Cave c = new Cave(building);
         while(gameOn)
         {
+            if(player1.health <= 0){
+                System.out.println("You died.");
+                gameOff();
+            }
+
             System.out.println("Where would you like to move? (Choose N, S, E, W) Or, press M to look at the map.");
             String move = in.nextLine();
             if (move.toLowerCase().trim().equals("m")){
