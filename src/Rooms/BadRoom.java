@@ -18,7 +18,7 @@ public class BadRoom extends Room {
      * @param x the Person entering
      */
     public void enterRoom(Person x) {
-
+        this.discovered = true;
         occupant = x;
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
@@ -38,10 +38,10 @@ public class BadRoom extends Room {
             return("[P]");
         }
         else if (this.discovered == false){
-            return("[!]");
+            return("[?]");
         }
         else{
-            return ("[-]");
+            return ("[!]");
         }
     }
 }

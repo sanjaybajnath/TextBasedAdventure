@@ -31,6 +31,7 @@ public class Room {
         }
         else{
             this.item.use(x);
+            this.item = null;
         }
 
 

@@ -23,7 +23,7 @@ public class Exit extends Room
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
         if(x.hasKey){
-            System.out.println("Congratulations. You win.");
+            System.out.println("Congratulations,"+x.getName()+". You win.");
             Runner.gameOff();
         }
         else{

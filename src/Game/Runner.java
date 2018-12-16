@@ -3,7 +3,6 @@ package Game;
 //Find a key and get to the exit without dying.
 
 import People.Person;
-import Rooms.OtherRoom;
 import Rooms.Room;
 import Rooms.Exit;
 import Rooms.BadRoom;
@@ -20,9 +19,9 @@ public class Runner {
 
     public static void main(String[] args)
     {
+
+
         Room[][] building = new Room[5][5];
-
-
         //Fill the building with normal rooms
         for (int x = 0; x<building.length; x++)
         {
@@ -114,23 +113,25 @@ public class Runner {
         HealthPack h2 = new HealthPack();
         building[z2][w2].item = h2;
 
-
-        //Setup player 1 and the input scanner
-        Person player1 = new Person("FirstName", "FamilyName", 0,0);
-        building[0][0].enterRoom(player1);
         Scanner in = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        String name = in.nextLine();
+        //Setup player 1 and the input scanner
+        Person player1 = new Person( name, 0,0);
+        building[0][0].enterRoom(player1);
+
         Cave c = new Cave(building);
         while(gameOn)
         {
-            if(player1.health <= 0){
-                System.out.println("You died.");
-                gameOff();
-            }
 
-            System.out.println("Where would you like to move? (Choose N, S, E, W) Or, press M to look at the map.");
+
+            System.out.println("Where would you like to move? (Choose N, S, E, W). Press M to look at the map. Press h to check your health.");
             String move = in.nextLine();
             if (move.toLowerCase().trim().equals("m")){
                 c.print();
+            }
+            if (move.toLowerCase().trim().equals("h")){
+                System.out.println("You have "+player1.getHealth()+" health.");
             }
             else if(validMove(move, player1, building))
             {
@@ -140,7 +141,10 @@ public class Runner {
             else {
                 System.out.println("Please choose a valid move.");
             }
-
+            if(player1.health <= 0){
+                System.out.println("Game over. "+name+" died.");
+                gameOff();
+            }
 
         }
         in.close();

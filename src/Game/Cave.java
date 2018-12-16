@@ -9,6 +9,10 @@ public class Cave {
         this.map = map;
     }
 
+    public Cave (int n){
+        this.map = new Room [n][n];
+    }
+
     public int getRows(){
         return map.length;
     }
