@@ -27,7 +27,7 @@ public class Room {
         x.setxLoc(this.xLoc);
         x.setyLoc(this.yLoc);
         if (this.item == null){
-            System.out.println("You enter a plain old room");
+            System.out.println("This room is empty.");
         }
         else{
             this.item.use(x);

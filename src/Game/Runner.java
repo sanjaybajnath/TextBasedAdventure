@@ -8,12 +8,17 @@ import Rooms.Exit;
 import Rooms.BadRoom;
 import Items.Key;
 import Items.HealthPack;
-
+import Items.Weapon;
 
 import java.util.Scanner;
 
 public class Runner {
 
+    public static void print(String str){
+        System.out.println(str);
+    }
+
+    
 
     private static boolean gameOn = true;
 
@@ -110,11 +115,11 @@ public class Runner {
             z2 = (int)(Math.random()*building.length);
             w2 = (int)(Math.random()*building.length);
         }
-        HealthPack h2 = new HealthPack();
-        building[z2][w2].item = h2;
+        Weapon glock = new Weapon();
+        building[z2][w2].item = glock;
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter your name: ");
+        print("Enter your name: ");
         String name = in.nextLine();
         //Setup player 1 and the input scanner
         Person player1 = new Person( name, 0,0);
@@ -125,24 +130,24 @@ public class Runner {
         {
 
 
-            System.out.println("Where would you like to move? (Choose N, S, E, W). Press M to look at the map. Press h to check your health.");
+            print("Where would you like to move? (Choose N, S, E, W). Press M to look at the map. Press h to check your health.");
             String move = in.nextLine();
             if (move.toLowerCase().trim().equals("m")){
                 c.print();
             }
             if (move.toLowerCase().trim().equals("h")){
-                System.out.println("You have "+player1.getHealth()+" health.");
+                print("You have "+player1.getHealth()+" health.");
             }
             else if(validMove(move, player1, building))
             {
-                System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
+                print("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
 
             }
             else {
-                System.out.println("Please choose a valid move.");
+                print("Please choose a valid move.");
             }
             if(player1.health <= 0){
-                System.out.println("Game over. "+name+" died.");
+                print("Game over. "+name+" died.");
                 gameOff();
             }
 

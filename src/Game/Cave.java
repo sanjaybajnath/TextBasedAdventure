@@ -13,6 +13,9 @@ public class Cave {
         this.map = new Room [n][n];
     }
 
+    public Room[][] getMap(){
+        return this.map;
+    }
     public int getRows(){
         return map.length;
     }
