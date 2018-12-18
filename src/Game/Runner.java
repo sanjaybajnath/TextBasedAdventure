@@ -17,6 +17,7 @@ public class Runner {
         System.out.println(str);
     }
 
+    //Fill the board with different rooms and items.
     public static void fillCave(Room[][]building){
         for (int x = 0; x<building.length; x++)
         {
