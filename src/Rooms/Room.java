@@ -8,6 +8,8 @@ public class Room {
     public Item item;
     Person occupant;
     int xLoc,yLoc;
+
+    //discovered helps to keep track of which rooms have been entered.
     private boolean discovered = false;
     public Room(int x, int y)
     {

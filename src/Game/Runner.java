@@ -9,7 +9,6 @@ import Rooms.BadRoom;
 import Items.Key;
 import Items.HealthPack;
 import Items.Weapon;
-
 import java.util.Scanner;
 
 public class Runner {
@@ -18,16 +17,7 @@ public class Runner {
         System.out.println(str);
     }
 
-    
-
-    private static boolean gameOn = true;
-
-    public static void main(String[] args)
-    {
-
-
-        Room[][] building = new Room[5][5];
-        //Fill the building with normal rooms
+    public static void fillCave(Room[][]building){
         for (int x = 0; x<building.length; x++)
         {
             for (int y = 0; y < building[x].length; y++)
@@ -36,7 +26,7 @@ public class Runner {
             }
         }
 
-        //Create a random exit room.
+        //Create a random exit room and 2 bad rooms.
         int x = (int)(Math.random()*building.length);
         int y = (int)(Math.random()*building.length);
         while(x==0 && y == 0){
@@ -117,19 +107,43 @@ public class Runner {
         }
         Weapon glock = new Weapon();
         building[z2][w2].item = glock;
+    }
 
+    private static boolean gameOn = true;
+
+    public static void main(String[] args)
+    {
+
+
+        Room[][] building = new Room[5][5];
         Scanner in = new Scanner(System.in);
         print("Enter your name: ");
         String name = in.nextLine();
-        //Setup player 1 and the input scanner
+        print("Would you like to play on a custom-sized board? Press Y to choose the size,or press anything else to play on the default 5x5 board.");
+        String custom = in.nextLine();
+        int size = 5;
+        if(custom.toLowerCase().trim().equals("y")){
+            print("What size would you like the board to be?(must be at least 5) ");
+            size = in.nextInt();
+        }
+
+
+        Cave c = new Cave(size);
+        if(size<=5){
+            c = new Cave (building);
+        }
+
+        building = c.getMap();
+
+        fillCave(building);
+
+        //Setup player 1
         Person player1 = new Person( name, 0,0);
         building[0][0].enterRoom(player1);
 
-        Cave c = new Cave(building);
+
         while(gameOn)
         {
-
-
             print("Where would you like to move? (Choose N, S, E, W). Press M to look at the map. Press h to check your health.");
             String move = in.nextLine();
             if (move.toLowerCase().trim().equals("m")){

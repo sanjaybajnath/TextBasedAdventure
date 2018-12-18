@@ -7,7 +7,7 @@ public class Weapon implements Item{
     public static int count = 0;
 
     public String getName(){
-        return("health pack");
+        return("weapon");
     }
 
     public void use (Person p){

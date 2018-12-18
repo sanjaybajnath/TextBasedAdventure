@@ -6,6 +6,8 @@ package People;
 public class Person {
     String name;
     int xLoc, yLoc;
+
+    //These static variables keep track of the player's inventory.
     public static int health;
     public static boolean hasKey = false;
     public static boolean hasWeapon = false;

@@ -14,7 +14,7 @@ public class Exit extends Room
     }
 
     /**
-     * Triggers the game ending conditions.
+     * Ends the game if the user already found the key.
      * @param x the Person entering
      */
     public void enterRoom(Person x) {

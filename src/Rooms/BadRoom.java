@@ -14,7 +14,7 @@ public class BadRoom extends Room {
     }
 
     /**
-     * Triggers the game ending conditions.
+     * the player loses 50 health if they enter this room without a weapon.
      * @param x the Person entering
      */
     public void enterRoom(Person x) {

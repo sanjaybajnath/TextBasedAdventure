@@ -5,6 +5,7 @@ import Rooms.Room;
 public class Cave {
     private Room[][]map;
 
+    //Multiple constructors so the user can play on a default or custom board.
     public Cave (Room[][]map){
         this.map = map;
     }
@@ -24,6 +25,7 @@ public class Cave {
         return map[0].length;
     }
 
+    //Prints the board in a readable format.
     public void print(){
         String row = "";
         for (int i = 0; i<map.length;i++){
